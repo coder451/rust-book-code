@@ -26,8 +26,12 @@ fn ask() -> bool {
     };
 
     let tokens = tokenize(&input);
+    if ! tokens.0 {
+        println!("Did not understand input {input} - try again");
+        return true
+    }
 
-    let _t: f64 = match tokens.0.parse() {
+    let _t: f64 = match tokens.1.parse() {
         Ok(num) => num,
         Err(_) => {
             println!("Could not understand temperature {input} - try \
@@ -39,6 +43,6 @@ fn ask() -> bool {
 
 }
 
-fn tokenize(_t: &str) -> (&str, &str) {
-    ("0", "C")
+fn tokenize(_t: &str) -> (bool, &str, &str) {
+    (true, "0", "C")
 }
