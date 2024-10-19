@@ -31,7 +31,7 @@ fn ask() -> bool {
         return true
     }
 
-    let _t: f64 = match tokens.1.parse() {
+    let t: f64 = match tokens.1.parse() {
         Ok(num) => num,
         Err(_) => {
             println!("Could not understand temperature {input} - try \
@@ -39,6 +39,26 @@ fn ask() -> bool {
             return true
         }
     };
+
+    let unit = match tokens.2 {
+        "c"=> "C",
+        "C"=> "C",
+        "f"=> "F",
+        "F"=> "F",
+        _ => {
+            println!("Did not understand the unit in {input}");
+            return false
+        }
+    };
+
+    if unit == "C" {
+        let result = (t / 5.0) * 9.0 + 32.0;
+        println!("Result: {result:.1} F");
+    }
+    else {
+        let result = (t - 32.0) * 5.0 / 9.0;
+        println!("Result: {result:.1} C");
+    }
     true
 
 }
