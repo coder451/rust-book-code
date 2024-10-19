@@ -18,5 +18,8 @@ fn main() {
     const THREE_HOURS_IN_SECONDS: u32 = 60 * 60 * 3;
     println!("The constant THREE_HOURS_IN_SECONDS is {THREE_HOURS_IN_SECONDS}");
 
-
+    let x = 2.1; // f64
+    println!("x is {x}");
+    let y: f32 = 3.1; // f32
+    println!("y is {y}");
 }
