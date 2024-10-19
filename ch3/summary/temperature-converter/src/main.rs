@@ -2,6 +2,19 @@
 use std::io;
 use std::env;
 
+/// Converts between Fahrenheit and Celsius
+/// # Examples of use
+/// ```
+/// prog-name 10F
+/// prog-name 10 F
+/// prog-name 30.1C
+/// prog-name 30.1 C
+/// prog-name
+/// ```
+/// Lower-case units can also be used (`c``, `f`).
+/// Wnen run with no command-line args, the program runs in a loop,
+/// accepting input until `q` is input. 
+/// The prog-name is `temperature.exe` on Windows.
 fn main() {
     let args: Vec<String> = env::args().collect();
     if args.len() == 1 {
@@ -15,6 +28,12 @@ fn main() {
     }
 }
 
+/// Construct program input from command line args.
+/// Expected to be called with at least two args including the
+/// program name.
+/// 
+/// If there is one interesting arg, that is used.
+/// If there are two interesting args, they are joined.
 fn collect_args(args: Vec<String>) -> String {
     let arg1 = args.get(1)
         .expect("Get command line arg at index 1");
@@ -22,12 +41,14 @@ fn collect_args(args: Vec<String>) -> String {
     if args.len() == 3 {
         let arg2 = args.get(2)
             .expect("Can get command ine arg at index 2");
-        tokens += " ";
         tokens += arg2;
     }
     tokens
 }
 
+/// Given an input string, checks the input, computes the value
+/// and prints it. If there is a failure, returns false. The `verbose`
+/// flag causes more output and is used in the looping case.
 fn compute(input: &str, verbose: bool)  -> bool {
     let tokens = tokenize(&input);
     if ! tokens.0 {
@@ -71,6 +92,7 @@ fn compute(input: &str, verbose: bool)  -> bool {
 
 }
 
+/// Drives the loop from user input.
 fn ask() -> bool {
     println!("Enter the temperature as value type where value is a \
         decimal and type is F or C. Input q to quit");
@@ -92,6 +114,7 @@ fn ask() -> bool {
     compute(input, true)
 }
 
+/// Analyses user input
 fn tokenize(t: &str) -> (bool, &str, &str) {
     let tokens: Vec<&str> = t.split_whitespace().collect();
     if tokens.len() == 2 {
@@ -119,6 +142,7 @@ fn tokenize(t: &str) -> (bool, &str, &str) {
     }
 }
 
+/// Converts F to C and back
 fn t_c(t: f64, unit: &str) -> f64 {
     if unit == "C" {
         (t / 5.0) * 9.0 + 32.0
