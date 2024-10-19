@@ -1,0 +1,29 @@
+= Convert Temperature in Rust
+
+My first Rust program from scratch.
+Converts C to F and F to C.
+Run as
+
+----
+prog-name value[ ][F|C]
+----
+
+or
+
+----
+prog-name
+----
+
+In the first case the conversion runs once. 
+Examples of input are 10.1c, 10C, 10 c, 10 C, 
+11f, 11 F, 11f, 11 F.
+Negative values can be used.
+The value for conversion is followed by the unit, with an
+optional space or spaces separating the unit from the value.
+In this case there is minimal output and the result is printed on
+one line with no space between the value and the unit.
+
+In the second case it runs in a loop, requesting input in the
+format described above. 
+There is more output in this case than in the single execution case.
+End by inputting q instead of a temperature.
