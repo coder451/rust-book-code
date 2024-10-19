@@ -43,6 +43,17 @@ fn ask() -> bool {
 
 }
 
-fn tokenize(_t: &str) -> (bool, &str, &str) {
-    (true, "0", "C")
+fn tokenize(t: &str) -> (bool, &str, &str) {
+    let tokens: Vec<&str> = t.split_whitespace().collect();
+    if tokens.len() != 2 {
+        (false, t, t)
+    }
+    else {
+        (
+            true, 
+            // We know the size of the vector
+            tokens.get(0).expect("unexpected"), 
+            tokens.get(1).expect("unexpected")
+        )
+    }
 }
