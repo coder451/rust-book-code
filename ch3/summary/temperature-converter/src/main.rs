@@ -9,7 +9,7 @@ fn main() {
 
 fn ask() -> bool {
     println!("Enter the temperature as value type where value is a \
-    decimal and type is F or C");
+    decimal and type is F or C. Input q to quit");
 
     let mut t = String::new();
         
@@ -17,9 +17,10 @@ fn ask() -> bool {
         .read_line(&mut t)
         .expect("Failed to read line");
 
-    println!("The input was {t}");
-    let input = String::clone(&t);
-    if input.trim() == "q" { 
+    let binding = String::clone(&t);
+    let input = binding.trim();
+    println!("The input was {input}");
+    if input == "q" {
         println!("Exiting because q specified");
         return false
     };
@@ -30,7 +31,7 @@ fn ask() -> bool {
         Ok(num) => num,
         Err(_) => {
             println!("Could not understand temperature {input} - try \
-            again, or q to quit");
+            again.");
             return true
         }
     };
@@ -38,6 +39,6 @@ fn ask() -> bool {
 
 }
 
-fn tokenize(_t: &String) -> (&str, &str) {
+fn tokenize(_t: &str) -> (&str, &str) {
     ("0", "C")
 }
