@@ -1,9 +1,13 @@
 fn main() {
-    let mut n: i32 = 0;
-    loop {
-        n += 1;
-        const MAX: i32 = 10;
-        if n == MAX { break };
-        println!("again!");
-    }
+    let mut counter = 0;
+
+    let result = loop {
+        counter += 1;
+
+        if counter == 10 {
+            break counter * 2;
+        }
+    };
+
+    println!("The result is {result}");
 }
