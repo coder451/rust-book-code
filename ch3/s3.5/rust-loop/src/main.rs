@@ -1,13 +1,15 @@
 fn main() {
-    let mut counter = 0;
+    let result = doaloop();
+    println!("The result is {result}");
+}
 
-    let result = loop {
+fn doaloop() -> i32 {
+    let mut counter = 0;
+    loop {
         counter += 1;
 
         if counter == 10 {
-            break counter * 2;
+            return counter * 2;
         }
-    };
-
-    println!("The result is {result}");
+    }
 }
