@@ -1,0 +1,6 @@
+[package]
+name = "rust-array-access"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
