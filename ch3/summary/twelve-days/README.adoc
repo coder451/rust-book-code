@@ -1,0 +1,4 @@
+= The Twelve Days of Christmas
+
+Prints the words of the well-kown song, using lists to avoid 
+reptition in the code.
