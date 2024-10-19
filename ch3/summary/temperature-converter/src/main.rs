@@ -40,25 +40,19 @@ fn ask() -> bool {
         }
     };
 
-    let unit = match tokens.2 {
-        "c"=> "C",
-        "C"=> "C",
-        "f"=> "F",
-        "F"=> "F",
+    let (unit, other_unit) = match tokens.2 {
+        "c"=> ("C", "F"),
+        "C"=> ("C", "F"),
+        "f"=> ("F", "C"),
+        "F"=> ("F", "C"),
         _ => {
             println!("Did not understand the unit in {input}");
             return false
         }
     };
 
-    if unit == "C" {
-        let result = (t / 5.0) * 9.0 + 32.0;
-        println!("Result: {result:.1} F");
-    }
-    else {
-        let result = (t - 32.0) * 5.0 / 9.0;
-        println!("Result: {result:.1} C");
-    }
+    println!("Result: {0:.1} {1}", t_c(t, unit), other_unit);
+
     true
 
 }
@@ -75,5 +69,14 @@ fn tokenize(t: &str) -> (bool, &str, &str) {
             tokens.get(0).expect("unexpected"), 
             tokens.get(1).expect("unexpected")
         )
+    }
+}
+
+fn t_c(t: f64, unit: &str) -> f64 {
+    if unit == "C" {
+        (t / 5.0) * 9.0 + 32.0
+    }
+    else {
+        (t - 32.0) * 5.0 / 9.0
     }
 }
