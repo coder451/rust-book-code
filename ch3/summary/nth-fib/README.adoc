@@ -1,0 +1,14 @@
+= Fibonacci Calculator
+
+Calculates a list of fibonacci numbers requested by order - the nth
+numbers. 
+These start with 0th as 0, 1st as 1, 2nd as 1, 3rd as 2, 
+4th as 3 and so on. 
+A 64-bit unsigned integer is used, allowing up to
+the 93rd Fibonacci number to be calculated.
+The program is run with a list of desired N on the command line.
+Optionally --verbose may be added to get more output.
+The basic output is a list of requested orders with the corresponding 
+members of the Fibonacci series, one per line.
+For requested orders that are too large, that is indicated in the 
+output.
