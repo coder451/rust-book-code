@@ -38,14 +38,19 @@ fn main() {
     ];
     for item in ss {
         let s1 = String::from(item);
-        let w1 = first_word(&s1);
+        let w1 = first_word_str(&s1);
         println!("First word for \"{}\": \"{}\"", s1, w1)
     }
 
+    {
+        let s = "abc";
+        let w = first_word_str(s);
+        println!("First word for \"{}\": \"{}\"", s, w)
+    }
 }
 
 
-fn first_word(s: &String) -> &str {
+fn first_word_str(s: &str) -> &str {
     let bytes = s.as_bytes();
 
     let mut have_word = false;
