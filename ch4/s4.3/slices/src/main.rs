@@ -18,4 +18,17 @@ fn main() {
         println!(" ..2: {slice}");
     }
 
+
+    {
+        let s = String::from("hello");
+
+        let len = s.len();
+        
+        println!("These are the same:");
+        let slice = &s[3..len];
+        println!("3..{len}: {slice}");
+        let slice = &s[3..];
+        println!("3.. : {slice}");
+    }
+
 }
