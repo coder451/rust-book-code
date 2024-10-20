@@ -52,6 +52,13 @@ fn main() {
         let w = first_word_str(s);
         println!("First word for \"{}\": \"{}\"", s, w)
     }
+
+    {
+        // Another kind of slice
+        let a = [1, 2, 3, 4, 5];
+        let slice = &a[1..3];
+        assert_eq!(slice, &[2, 3]);
+    }
 }
 
 
