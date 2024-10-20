@@ -9,6 +9,9 @@ fn main() {
         height: 50,
     };
 
+    // Try to print rectangle
+    println!("rect1 is {}", rect1);
+
     println!(
         "The area of the rectangle is {} square pixels.",
         area(&rect1)
