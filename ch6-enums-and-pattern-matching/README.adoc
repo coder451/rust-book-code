@@ -1,0 +1,9 @@
+= Enums and Pattern Matching
+
+Enums containing _variants_.
+
+_Option_ enum.
+
+Using _match_ with enums.
+
+The _if let_ construction with enums.
