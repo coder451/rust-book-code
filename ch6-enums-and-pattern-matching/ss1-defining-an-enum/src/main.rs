@@ -5,4 +5,8 @@ enum IpAddrKind {
 
 fn main() {
     println!("Enums and pattern matching");
+
+    let four = IpAddrKind::V4;
+    let six = IpAddrKind::V6;
+
 }
