@@ -31,17 +31,22 @@ fn main() {
         println!("3.. : {slice}");
     }
 
-    let ss = [
-        "", " ", " a", "a ", " a ",
-        "  ", " ab", "ab ", " ab ",
-        "   ", "  abc", "abc  ", "  abc  ",
-    ];
-    for item in ss {
-        let s1 = String::from(item);
-        let w1 = first_word_str(&s1);
-        println!("First word for \"{}\": \"{}\"", s1, w1)
+    {    let ss = [
+            "", " ", " a", "a ", " a ",
+            "  ", " ab", "ab ", " ab ",
+            "   ", "  abc", "abc  ", "  abc  ",
+        ];
+        for item in ss {
+            let s1 = String::from(item);
+            // Uses "deref coercion"
+            let w1 = first_word_str(&s1);
+            println!("First word for \"{}\": \"{}\"", s1, w1)
+        }
+        for item in ss {
+            let w1 = first_word_str(item);
+            println!("First word for \"{}\": \"{}\"", item, w1)
+        }
     }
-
     {
         let s = "abc";
         let w = first_word_str(s);
