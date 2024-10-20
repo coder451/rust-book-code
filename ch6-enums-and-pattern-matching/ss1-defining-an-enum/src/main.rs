@@ -17,6 +17,11 @@ enum Message {
     ChangeColor(i32, i32, i32),
 }
 
+enum Animal {
+    Dog,
+    Cat,
+}
+
 fn main() {
     println!("Enums and pattern matching");
 
@@ -33,4 +38,6 @@ fn main() {
 
     let loopback = IpAddr::V6(String::from("::1"));
         
-    }
+    let mut a: Animal = Animal::Dog;
+    a = Animal::Cat;
+}
