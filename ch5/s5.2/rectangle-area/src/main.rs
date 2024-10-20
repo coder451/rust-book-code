@@ -13,6 +13,12 @@ fn main() {
     // Try to print rectangle
     println!("rect1 is {:?}", rect1);
 
+    // Use pretty-print
+    println!("pretty rect1 is {:#?}", rect1);
+
+    // Slightly different syntax
+    println!("pretty rect1 is {rect1:#?}");
+
     println!(
         "The area of the rectangle is {} square pixels.",
         area(&rect1)
