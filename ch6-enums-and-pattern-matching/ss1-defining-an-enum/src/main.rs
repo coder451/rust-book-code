@@ -25,6 +25,16 @@ enum Animal {
     Cat { name: String, weight: f64 },
 }
 
+// An enum where none of the constructors have parameters is said to
+// be a fieldless enum. The variants can be tuple-like, struct-like
+// or unit-like.
+enum Fieldless {
+    Tuple(),
+    Struct{},
+    Unit,
+}
+
+
 fn main() {
     println!("Enums and pattern matching");
 
@@ -47,5 +57,9 @@ fn main() {
     a = Animal::Cat { name: "Spotty".to_string(), weight: 2.7 };
     // This makes another cat, using the opposite order of named parameters
     let b = Animal::Cat { weight: 2.7, name: "Spotty".to_string() };
+
+    let tupleInstance = Fieldless::Tuple();
+    let structInstance = Fieldless::Struct{};
+    let UnitInstance = Fieldless::Unit;
 
 }
