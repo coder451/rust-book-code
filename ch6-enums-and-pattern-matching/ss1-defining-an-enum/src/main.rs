@@ -16,6 +16,12 @@ enum Message {
     Write(String),
     ChangeColor(i32, i32, i32),
 }
+impl Message {
+    fn call(&self) {
+        // method body would be defined here
+    }
+}
+
 // In this enum, Dog is an enum variant, while Cat is 
 // a "struct-like enum variant" because it has named constructor
 // parameters. It looks like a struct, and uses {} in its 
@@ -58,6 +64,11 @@ fn main() {
     let home = IpAddr::V4(127, 0, 0, 1);
 
     let loopback = IpAddr::V6(String::from("::1"));
+
+    // Method on an enum
+    let m = Message::Write(String::from("hello"));
+    m.call();
+
 
     // This constructs a mutable reference to a Dog
     let mut a = Animal::Dog("Cocoa".to_string(), 37.2);
