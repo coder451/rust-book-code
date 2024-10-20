@@ -12,12 +12,18 @@ struct Rectangle {
 impl Rectangle {
     // Function to tell if the width is positive
     // The use of self as a parameter makes it a method
+    // No type is required on self
+    // Use &mut self to define a mutating method
+    // Just using self grabs the instance, so you can return it as 
+    // something else perhaps
+    // Can use field name as method name as well, disambiguate based
+    // on whether name is followed by ()
     fn width(&self) -> bool {
         self.width > 0
     }
 
     // self parameter comes first
-    // immutable borrow of other
+    // immutable borrow of other in this case
     fn can_hold(&self, other: &Rectangle) -> bool {
         self.width > other.width && self.height > other.height 
     }
