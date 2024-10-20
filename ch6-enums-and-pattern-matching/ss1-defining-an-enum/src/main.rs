@@ -35,6 +35,14 @@ enum Fieldless {
 }
 
 
+// Unit-only enum can contains constants, apparently
+enum Fbb {
+    Foo = 3,
+    Bar = 2,
+    Baz = 1,
+}
+
+
 fn main() {
     println!("Enums and pattern matching");
 
@@ -61,5 +69,7 @@ fn main() {
     let tupleInstance = Fieldless::Tuple();
     let structInstance = Fieldless::Struct{};
     let UnitInstance = Fieldless::Unit;
+
+    let foo = Fbb::Foo;
 
 }
