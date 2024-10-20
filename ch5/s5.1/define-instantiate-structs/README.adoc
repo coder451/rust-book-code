@@ -13,3 +13,5 @@ struct User {
 
 See the `main.rs` code for defining an instance from this.
 Use dot notation to get values.
+
+An entire instance must be mutable - not individual members.g
