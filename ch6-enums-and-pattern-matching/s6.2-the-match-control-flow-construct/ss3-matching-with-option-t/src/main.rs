@@ -1,5 +1,6 @@
 fn plus_one(x: Option<i32>) -> Option<i32> {
     match x {
+        // Rust patterns must be exhaustive
         None => None,
         Some(i) => Some(i + 1),
     }
