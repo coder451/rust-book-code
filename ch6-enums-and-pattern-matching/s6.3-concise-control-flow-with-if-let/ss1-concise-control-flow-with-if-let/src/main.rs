@@ -49,10 +49,20 @@ fn main() {
         
         let mut count = 0;
         let coin = Coin::Dime;
-        match coin {
+        match &coin {     // <- this moves coin if & not used to borrow
             Coin::Quarter(state) => println!("State quarter from {state:?}!"),
             _ => count += 1,
         }
         println!("count: {count}");
+
+        // Or use:
+
+        if let Coin::Quarter(state) = &coin { // borrow...
+            println!("State quarter from {state:?}!");
+        } else {
+            count += 1;
+        }
+        println!("count: {count}");
+    
     }
 }
