@@ -24,11 +24,35 @@ fn main() {
         // Example when the supplied value is nothing
         println!("Try nothing");
         let nothing: Option<i32> = None;
-        
+
         if let Some(max) = nothing {
             println!("The maximum is configured to be {max}");
         }
 
     
+    }
+
+    {
+        #[derive(Debug)] // so we can inspect the state in a minute
+        enum UsState {
+            Alabama,
+            Alaska,
+            // --snip--
+        }
+        
+        enum Coin {
+            Penny,
+            Nickel,
+            Dime,
+            Quarter(UsState),
+        }
+        
+        let mut count = 0;
+        let coin = Coin::Dime;
+        match coin {
+            Coin::Quarter(state) => println!("State quarter from {state:?}!"),
+            _ => count += 1,
+        }
+        println!("count: {count}");
     }
 }
