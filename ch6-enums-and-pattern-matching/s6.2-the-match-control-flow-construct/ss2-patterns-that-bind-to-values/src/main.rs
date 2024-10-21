@@ -4,7 +4,8 @@ enum UsState {
     Alaska,
     // --snip--
 }
-
+// Quarters are related to states because each state has a quarter
+// with a characteristic scene on it
 enum Coin {
     Penny,
     Nickel,
@@ -12,6 +13,22 @@ enum Coin {
     Quarter(UsState),
 }
 
+// In addition to the value, this function prints the corresponding 
+// state
+fn value_in_cents(coin: &Coin) -> u8 {
+    match coin {
+        Coin::Penny => 1,
+        Coin::Nickel => 5,
+        Coin::Dime => 10,
+        Coin::Quarter(state) => {
+            println!("State quarter from {state:?}!");
+            25
+        }
+    }
+}
+
 fn main() {
     println!("Patterns that bind to values");
+
+    println!("{}", value_in_cents(&Coin::Quarter(UsState::Alabama)));
 }
