@@ -1,0 +1,44 @@
+= Packages and Crates
+:source-highlighter: highlight.js
+
+Crates are _binary_ or _library_.
+These produce a inary with a `main` and a library for sharing code, 
+respectively.
+
+_Crate root_ is a special file in a crate, from which the compiler 
+starts.
+
+A _package_ is a bundle of one or more crates.
+It contains a `Cargo.toml` file that says how to build.
+
+[source,toml]
+----
+[package]
+name = "ss1-defining-an-enum"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+----
+Create a package:
+
+[source, shell]
+----
+$ cargo new my-project
+     Created binary (application) `my-project` package
+$ ls my-project
+Cargo.toml
+src
+$ ls my-project/src
+main.rs
+----
+
+Convention: 
+
+- src/main.rs is crate root for binary crate with same name 
+as the package.
+- src/lib.rs is crate root for a library crate with same name as the 
+package
+
+_A package can have multiple binary crates by placing files in the 
+src/bin directory: each file will be a separate binary crate._
