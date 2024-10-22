@@ -1,0 +1,54 @@
+= Modules Cheat Sheet
+:source-highlighter: highlight.js
+
+- Start from crate root
+- Declare modules in the crate root
+- Declare Submodules in files other than the crate root
+- Use paths to code in modules
+- Use pub mod to make a module public
+- `use` shortens code paths
+
+Here's what it looks like for this example:
+----
+backyard
+├── Cargo.lock
+├── Cargo.toml
+└── src
+    ├── garden
+    │   └── vegetables.rs
+    ├── garden.rs
+    └── main.rs
+----
+
+Initially copy this code into `src/main.rs`:
+
+[source,rust]
+----
+use crate::garden::vegetables::Asparagus;
+
+pub mod garden;
+
+fn main() {
+    let plant = Asparagus {};
+    println!("I'm growing {plant:?}!");
+}
+----
+The `pub mod garden` says to include from `src/garden.rs`, which does 
+not exist yet.
+So the editor shows an error and the compilation would fail.
+
+We therefore add the `garden` file containing
+[source,rust]
+----
+pub mod vegetables;
+----
+
+This requires `src/vegetables.rs` so we add that to, containing
+
+[source,rust]
+----
+#[derive(Debug)]
+pub struct Asparagus {}
+----
+
+With these changes the main program runs successfully.
