@@ -45,11 +45,11 @@ mod front_of_house {
     }
 }
 
-// Bring hosting module into this scope
-// But it's not available in mod customer.
-use crate::front_of_house::hosting;
 
 mod customer {
+    // Bring hosting module into this scope
+    use crate::front_of_house::hosting;
+    
     pub fn eat_at_restaurant() {
 
         // Access a hosting function
