@@ -3,6 +3,8 @@
 
 Structs and enums can be made public.
 
-Separately, their members can be made public individually. 
+Separately, struct members can be made public individually. 
 So they can have private implementation details and a public
 implementation.
+
+A public enum has all variants public.

@@ -21,6 +21,12 @@ mod back_of_house {
             }
         }
     }
+
+    // A public enum
+    pub enum Appetizer {
+        Soup,
+        Salad,
+    }
 }
 
 mod front_of_house {
@@ -48,5 +54,10 @@ pub fn eat_at_restaurant() {
 
     // The next line won't compile if we uncomment it; we're not allowed
     // to see or modify the seasonal fruit that comes with the meal
-    meal.seasonal_fruit = String::from("blueberries");
+    //meal.seasonal_fruit = String::from("blueberries");
+
+    // Variants of a public enum are public
+    let order1 = back_of_house::Appetizer::Soup;
+    let order2 = back_of_house::Appetizer::Salad;
 }
+
