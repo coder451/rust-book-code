@@ -1,0 +1,8 @@
+= Grouping Related Code in Modules
+:source-highlighter: highlight.js
+
+Structs and enums can be made public.
+
+Separately, their members can be made public individually. 
+So they can have private implementation details and a public
+implementation.
