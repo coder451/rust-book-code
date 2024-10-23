@@ -1,5 +1,5 @@
 [package]
-name = "ss2-grouping-code-in-modules"
+name = "ss2-making-structs-and-enums-public"
 version = "0.1.0"
 edition = "2021"
 

@@ -1,4 +1,4 @@
-= Grouping Related Code in Modules
+= Starting Relative Paths with `super`
 :source-highlighter: highlight.js
 
 The keyword `super` can be used in a path to refer to the parent

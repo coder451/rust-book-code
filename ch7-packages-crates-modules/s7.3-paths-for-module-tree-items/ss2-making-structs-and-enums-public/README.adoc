@@ -1,4 +1,4 @@
-= Grouping Related Code in Modules
+= Making Structs and enums public
 :source-highlighter: highlight.js
 
 Structs and enums can be made public.

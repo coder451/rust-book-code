@@ -1,4 +1,4 @@
-= Grouping Related Code in Modules
+= Introduction
 :source-highlighter: highlight.js
 
 From the previous subsection...

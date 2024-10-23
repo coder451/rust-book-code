@@ -1,4 +1,4 @@
-= Grouping Related Code in Modules
+= Introduction
 :source-highlighter: highlight.js
 
 `use` applies to the scope in which it is located, not all subsequent 
