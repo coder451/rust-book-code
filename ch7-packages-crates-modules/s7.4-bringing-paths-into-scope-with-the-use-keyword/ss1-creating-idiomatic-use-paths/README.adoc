@@ -7,4 +7,33 @@ module.
 Instead, `use` its parent module, and then qualify its name with the 
 name of its parent.
 
+The opposite convention is used for structs and enums.
+That is, the complete path is specified in the `use`.
 
+[source,rust]
+----
+use std::collections::HashMap;
+
+fn main() {
+    let mut map = HashMap::new();
+    map.insert(1, 2);
+}
+----
+
+Of course, if two items have the same name, they can't both be brought
+into the same scope with complete `use` paths. 
+One common example is a `Result` struct provided by many libraries:
+
+[source,rust]
+----
+use std::fmt;
+use std::io;
+
+fn function1() -> fmt::Result {
+    // --snip--
+}
+
+fn function2() -> io::Result<()> {
+    // --snip--
+}
+----
