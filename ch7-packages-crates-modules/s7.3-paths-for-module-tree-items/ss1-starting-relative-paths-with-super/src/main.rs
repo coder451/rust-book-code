@@ -1,3 +1,3 @@
 fn main() {
-    println!("Hello, world!");
+    println!("Starting relative paths with super");
 }

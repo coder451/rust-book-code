@@ -11,5 +11,5 @@ pub fn eat_at_restaurant() {
 }
 
 fn main() {
-    println!("Exporting names with pub use");
+    println!("Re-exporting names with pub use");
 }

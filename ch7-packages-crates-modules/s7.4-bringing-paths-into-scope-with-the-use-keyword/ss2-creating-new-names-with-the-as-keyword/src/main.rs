@@ -22,5 +22,5 @@ fn function2() -> YourIoResult {
 }
 
 fn main() {
-    println!("Hello, world!");
+    println!("Creating new names with the as keyword");
 }
