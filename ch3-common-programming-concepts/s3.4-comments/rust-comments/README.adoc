@@ -1,0 +1,21 @@
+= Comments
+
+A lib.rs for illustrating doc comments has been added.
+
+Doc comments on consecutive lines are rendered without an
+intervening line break. 
+To avoid this behaviour, leave two trailing spaces at the end of any
+line after which you need a break. 
+This behaviour is based on 
+https://spec.commonmark.org/0.30/#softbreak[this section of the Commonmark spec].
+
+This is pretty bad behaviour in my opinion.
+
+Doc comments may be _line_ `//!` or _block_ `/*! ... */`
+
+Doc comments may be outer or inner.
+
+An outer doc comment is applied to the next item after it.
+
+An inner doc comment is applied to the previous item, in other words, 
+the one it is inside.
