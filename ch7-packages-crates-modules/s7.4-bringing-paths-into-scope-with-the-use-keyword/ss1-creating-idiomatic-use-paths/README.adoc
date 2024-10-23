@@ -1,0 +1,10 @@
+= Creating Idiomatic Use Paths
+:source-highlighter: highlight.js
+
+Do not `use` a function then refer to it by its bare name.
+Doing that would conceal the fact that it comes from a different
+module.
+Instead, `use` its parent module, and then qualify its name with the 
+name of its parent.
+
+
