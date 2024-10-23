@@ -54,3 +54,6 @@ To make it accessible, it is necessary to
 Use the `pub` keyword.
 
 _CHILD MODULES CAN SEE THEIR PARENTS' DETAILS_
+
+Good practice is to define a main.rs and a lib.rs, with the binary
+using only the public interface of the library.
