@@ -45,28 +45,30 @@ mod front_of_house {
     }
 }
 
-// Bring hosting module into the scope of the following function
+// Bring hosting module into this scope
+// But it's not available in mod customer.
 use crate::front_of_house::hosting;
 
-pub fn eat_at_restaurant() {
+mod customer {
+    pub fn eat_at_restaurant() {
 
-    // Access a hosting function
-    // The hosting module is public and so is the add_to_waitlist 
-    // function
-    hosting::add_to_waitlist();
+        // Access a hosting function
+        // The hosting module is public and so is the add_to_waitlist 
+        // function
+        hosting::add_to_waitlist();
 
-    // Order a breakfast in the summer with Rye toast
-    let mut meal = back_of_house::Breakfast::summer("Rye");
-    // Change our mind about what bread we'd like
-    meal.toast = String::from("Wheat");
-    println!("I'd like {} toast please", meal.toast);
+        // Order a breakfast in the summer with Rye toast
+        let mut meal = back_of_house::Breakfast::summer("Rye");
+        // Change our mind about what bread we'd like
+        meal.toast = String::from("Wheat");
+        println!("I'd like {} toast please", meal.toast);
 
-    // The next line won't compile if we uncomment it; we're not allowed
-    // to see or modify the seasonal fruit that comes with the meal
-    //meal.seasonal_fruit = String::from("blueberries");
+        // The next line won't compile if we uncomment it; we're not allowed
+        // to see or modify the seasonal fruit that comes with the meal
+        //meal.seasonal_fruit = String::from("blueberries");
 
-    // Variants of a public enum are public
-    let order1 = back_of_house::Appetizer::Soup;
-    let order2 = back_of_house::Appetizer::Salad;
+        // Variants of a public enum are public
+        let order1 = back_of_house::Appetizer::Soup;
+        let order2 = back_of_house::Appetizer::Salad;
+    }
 }
-

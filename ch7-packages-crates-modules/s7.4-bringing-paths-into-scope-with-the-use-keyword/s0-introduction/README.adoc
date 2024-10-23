@@ -1,3 +1,25 @@
 = Grouping Related Code in Modules
 :source-highlighter: highlight.js
 
+`use` applies to the scope in which it is located, not all subsequent 
+scopes.
+
+[source,rust]
+----
+mod front_of_house {
+    pub mod hosting {
+        pub fn add_to_waitlist() {}
+    }
+}
+
+use crate::front_of_house::hosting;
+
+mod customer {
+    pub fn eat_at_restaurant() {
+        hosting::add_to_waitlist();
+    }
+}
+----
+
+In this code, the `use` declaration is not available inside the
+`customer` module.
