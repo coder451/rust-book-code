@@ -45,7 +45,16 @@ mod front_of_house {
     }
 }
 
+// Bring hosting module into the scope of the following function
+use crate::front_of_house::hosting;
+
 pub fn eat_at_restaurant() {
+
+    // Access a hosting function
+    // The hosting module is public and so is the add_to_waitlist 
+    // function
+    hosting::add_to_waitlist();
+
     // Order a breakfast in the summer with Rye toast
     let mut meal = back_of_house::Breakfast::summer("Rye");
     // Change our mind about what bread we'd like
