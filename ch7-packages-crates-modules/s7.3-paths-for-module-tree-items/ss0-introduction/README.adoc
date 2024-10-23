@@ -1,4 +1,7 @@
 = Grouping Related Code in Modules
+:source-highlighter: highlight.js
+
+From the previous subsection...
 
 In the generated code, change main.rs to lib.rs.
 
@@ -37,3 +40,17 @@ crate
          ├── serve_order
          └── take_payment
 ----
+
+end of previous subsection
+
+Module items are _private_ by default.
+The initial commit has an error in that the add_to_waitlist function
+is private.
+To make it accessible, it is necessary to
+
+- make the module it is in public
+- make it public
+
+Use the `pub` keyword.
+
+_CHILD MODULES CAN SEE THEIR PARENTS' DETAILS_
