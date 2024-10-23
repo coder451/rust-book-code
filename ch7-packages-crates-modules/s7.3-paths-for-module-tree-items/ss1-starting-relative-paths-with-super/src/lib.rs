@@ -1,3 +1,14 @@
+fn deliver_order() {}
+
+mod back_of_house {
+    fn fix_incorrect_order() {
+        cook_order();
+        super::deliver_order(); // <-- super
+    }
+
+    fn cook_order() {}
+}
+
 mod front_of_house {
     pub mod hosting {
         pub fn add_to_waitlist() {}
