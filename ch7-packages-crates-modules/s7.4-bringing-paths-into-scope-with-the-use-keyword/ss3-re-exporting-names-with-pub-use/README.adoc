@@ -1,0 +1,33 @@
+= Re-exporting a name with pub use
+
+The keyword combination `pub use` provides a way to provide a
+different interface to your code than the one based on its internal
+structure.
+
+For example, this can be used to avoid clients of a crate having to
+be aware of some internal level of organizatio in your code.
+
+In the restaurant example, `add_to-waitlist` is in the module
+`front_of_house::hosting`. 
+But looking at it from the point of view of the customer,
+who sees only the front of house, we would prefer `eat_at_restaurant`
+to not have to know about the front/back distinction.
+
+To allow this, we can add a re-export with `pub use`.
+
+[source,rust]
+----
+mod front_of_house {
+    pub mod hosting {
+        pub fn add_to_waitlist() {}
+    }
+}
+
+pub use crate::front_of_house::hosting;
+
+pub fn eat_at_restaurant() {
+    hosting::add_to_waitlist();
+}
+----
+
+Now the customer view is easier to understand.
