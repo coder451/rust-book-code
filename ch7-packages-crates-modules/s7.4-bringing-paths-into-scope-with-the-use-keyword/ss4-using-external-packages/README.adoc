@@ -1,0 +1,67 @@
+= Using External Packages
+:source-highlighter: highlight.js
+
+We used the `rand` package in Chapter 2.
+It was added to Cargo.toml and a `use` directive was placed in the 
+source file.
+
+Packages are available at crates.io.
+It looks like this is a registry in the sense that it gives a link
+to a Git repository where the source code for the crate can be found.
+
+The file `Cargo.toml` contains the explicit dependencies and the
+inferred dependencies. It is updated automatically.
+
+The std library is supplied witht the Rust compiler. It does not have to 
+be downloaded from a repositiory.
+
+Inspecting the compiler output in Chapter 2 shows that the downloaded
+crate is compiled from source. The source is downloaded to ~/.cargo
+under registry/src.
+
+By default, the registry _crates.io_ is used. 
+This means you can use just the version number as we did in Chapter 2. 
+
+_The Cargo Book_ has details on specifying an alternate registry or
+a git repository.
+In a nutshell, instead of 
+
+[source,toml]
+----
+[dependencies]
+time = "0.1.12"
+----
+
+you can write, for another registry,
+
+[source,toml]
+----
+[dependencies]
+some-crate = { version = "1.0", registry = "my-registry" }
+----
+
+where _my-registry_ is a name configured in `.cargo/Cargo.toml`.
+
+
+For a Git repository, you can write, at a minimum, for example
+
+[source,toml]
+----
+[dependencies]
+regex = { git = "https://github.com/rust-lang/regex.git" }
+----
+
+According to _The Cargo Book_, Cargo fetches the repository 
+(Ed: it needs permission) and traverses the file tree to find
+the `Cargo.toml` _for the requested crate_ anywhere inside it. 
+
+You can add a `rev`, `tag`, or `branch` key to soecify the commit you 
+want:
+
+[source,toml]
+----
+[dependencies]
+regex = { git = "https://github.com/rust-lang/regex.git", branch = "next" }
+----
+
+ See _The Cargo Book_ for examples.
