@@ -1,0 +1,8 @@
+= The Glob Operator
+
+Use this to bring in all the public items defined in a path.
+
+[source,rust]
+----
+use std::collections::*;
+----
