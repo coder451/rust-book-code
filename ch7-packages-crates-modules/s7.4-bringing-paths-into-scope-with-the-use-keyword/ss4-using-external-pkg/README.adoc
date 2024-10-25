@@ -64,4 +64,5 @@ want:
 regex = { git = "https://github.com/rust-lang/regex.git", branch = "next" }
 ----
 
- See _The Cargo Book_ for examples.
+See _The Cargo Book_ for examples.
+
