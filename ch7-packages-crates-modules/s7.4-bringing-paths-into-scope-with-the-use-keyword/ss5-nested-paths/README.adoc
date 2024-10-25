@@ -1,2 +1,13 @@
 = Using Nested Paths to Clean Up Large Use Lists
 
+Ex:
+
+[source,rust]
+----
+// --snip--
+use std::cmp::Ordering;
+use std::io;
+// --snip--
+----
+
+The subpaths can use `self`.

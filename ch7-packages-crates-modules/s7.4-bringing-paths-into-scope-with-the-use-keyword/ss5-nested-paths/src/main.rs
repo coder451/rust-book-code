@@ -1,7 +1,6 @@
 use rand::Rng;
 
-use std::cmp::Ordering;
-use std::io;
+use std::{cmp::Ordering, io};
 
 fn main() {
     println!("Using Nested Paths to Clean Up Large Use Lists");
