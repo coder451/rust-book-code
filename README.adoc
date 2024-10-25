@@ -1,0 +1,14 @@
+= Rust Book Code
+
+Note: the path lengths in this repository get up to where some of the 
+intermediate files have path lengths greater than the standard 
+Windows limit of 260. 
+Longer paths result in failures where an output file cannot be opened.
+You won't notice this until you are importing a crate in s deep folder.
+Then the additional intermediate files that are built have such 
+longer file paths.
+
+I first saw this in chapter 7, section 7.4, in the section on using 
+external packages.
+
+Keep the path lengths short enough and you'll avoid this.
