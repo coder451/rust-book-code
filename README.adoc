@@ -1,14 +1,24 @@
 = Rust Book Code
 
-Note: the path lengths in this repository get up to where some of the 
-intermediate files have path lengths greater than the standard 
+== Path Lengths
+
+The path lengths in this repository cause some of the 
+intermediate files to have path lengths greater than the standard 
 Windows limit of 260. 
-Longer paths result in failures where an output file cannot be opened.
-You won't notice this until you are importing a crate in s deep folder.
+Longer paths result in failures where a linker output file cannot be 
+opened.
+You won't notice this until you are importing a crate in a deep folder.
 Then the additional intermediate files that are built have such 
-longer file paths.
+long file paths.
 
 I first saw this in chapter 7, section 7.4, in the section on using 
 external packages.
+The error messages do not make the problem obvious.
+Searching in rust forums is not much help because this is on Windows 
+and related to the Windows linker. 
+It does come from some Rust behavior: the creation of intermediate
+files. 
+But that is a secondary cause.
+So you have to recognize this yourself.
 
-Keep the path lengths short enough and you'll avoid this.
+Or, just keep the path lengths short.
