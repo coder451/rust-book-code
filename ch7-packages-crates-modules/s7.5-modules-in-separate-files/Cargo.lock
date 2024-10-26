@@ -3,5 +3,5 @@
 version = 3
 
 [[package]]
-name = "ss1-creating-idiomatic-use-paths"
+name = "separate-file-modules"
 version = "0.1.0"

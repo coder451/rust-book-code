@@ -1,3 +1,41 @@
 = Separating Modules into Different Files
 :source-highlighter: highlight.js
 
+We begin by copying from a previous section to get the restaurant API.
+
+It has some warnings an errors. 
+The errors are easy to fix.
+
+The warnings are dead code warnings for items never used.
+
+The first is the function `deliver_order` at the top of the file.
+To remove the warning, it can be called from `main()`.
+To do this it has to be public.
+Then, to refer to it, note that this package has two crates:
+
+- A binary crate, because of `main.rs`
+- A library crate, because of `lib.rs`
+
+Both have the same name, but are different.
+This means that in `main.rs`, we have to supply the crate name to refer
+to something in the library crate. In this case the package name is set
+in `Cargo.toml`:
+
+[source,toml]
+----
+[package]
+name = "separate-file-modules"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+
+----
+It appears that the default name  for the two default packages is 
+constructed from the package name by sanitizing hyphens to underscores.
+So `separate-file-modules` becomes `separate_file_modules`.
+Therefore, to refer to a function in the library crate, it must be
+qualified with the name of the library crate `separate_file_modules`.
+
+A top-level module like `front_of_house` is expected to be in a file
+under `src` called `front_of_house.rs`.

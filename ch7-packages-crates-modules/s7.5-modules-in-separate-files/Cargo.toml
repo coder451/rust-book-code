@@ -1,5 +1,5 @@
 [package]
-name = "7.5-Separating Modules into Different Files"
+name = "separate-file-modules"
 version = "0.1.0"
 edition = "2021"
 
