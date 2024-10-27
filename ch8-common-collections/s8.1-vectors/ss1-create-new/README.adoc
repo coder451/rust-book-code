@@ -1,0 +1,13 @@
+= Create New Vector
+:source-highlighter: highlight.js
+
+Here is an example:
+
+[source,rust]
+----
+fn main() {
+    println!("Create new");
+
+    let _v: Vec<i32> = Vec::new();
+}
+----
