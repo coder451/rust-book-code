@@ -29,3 +29,6 @@ Iterators have _adapter methods_ like:
 - rev.
 
 The map containers have an `entry` API.
+
+The standard containers are imported in the prelude.
+There is no need to `use` anything to use them.
