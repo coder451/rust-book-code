@@ -55,3 +55,15 @@ You *do* need to declare the module name in `lib.rs`.
 module front_of_house;
 ----
 
+== Moving out a sub-module
+
+The `front_of_house` module contains two sub-modules and nothing else. 
+If those modules are large, we need to structure things better than 
+just putting them in the same file.
+
+This is done by representing `front_of_house` with a directory of the
+same name, along with `front_of_house.rs`, now containing only the
+declarations of the sub-modules.
+
+As with `lib.rs`, additional code can be placed in the file for the 
+parent module.
