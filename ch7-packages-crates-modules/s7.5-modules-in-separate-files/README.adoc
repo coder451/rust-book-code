@@ -1,6 +1,8 @@
 = Separating Modules into Different Files
 :source-highlighter: highlight.js
 
+== Starting out
+
 We begin by copying from a previous section to get the restaurant API.
 
 It has some warnings an errors. 
@@ -33,9 +35,23 @@ edition = "2021"
 ----
 It appears that the default name  for the two default packages is 
 constructed from the package name by sanitizing hyphens to underscores.
-So `separate-file-modules` becomes `separate_file_modules`.
+So `separate-file-modules`, derived from the name of the main directory,
+becomes `separate_file_modules`.
 Therefore, to refer to a function in the library crate, it must be
 qualified with the name of the library crate `separate_file_modules`.
 
+== Moving out a top-level module
+
 A top-level module like `front_of_house` is expected to be in a file
 under `src` called `front_of_house.rs`.
+The file takes the place of the `module{}` declaration in `lib.rs`.
+That is, you don't need the wrapper `module { ... }` for the code in 
+the module when the module is in a file named for the module.
+
+You *do* need to declare the module name in `lib.rs`.
+
+[source,rust]
+----
+module front_of_house;
+----
+
