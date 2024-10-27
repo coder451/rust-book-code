@@ -1,2 +1,4 @@
 = Storing Lists of Values with Vectors
 
+Just storing a value in a vector is enough for the compiler to infer
+the contained type.

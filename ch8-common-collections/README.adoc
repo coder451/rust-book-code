@@ -32,3 +32,6 @@ The map containers have an `entry` API.
 
 The standard containers are imported in the prelude.
 There is no need to `use` anything to use them.
+
+Generally, there is enough information available in the code so that
+the contained type need not be set explicitly. See 8.1 ss2.
