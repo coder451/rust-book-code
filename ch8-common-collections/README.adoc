@@ -1,0 +1,31 @@
+= Common Collections
+:source-highlighting: highlight.js
+
+- Vector
+- String
+- Hash map
+
+See 
+https://doc.rust-lang.org/std/collections/index.html[the documentation].
+
+There are four main categories:
+
+- Sequences: vector, double-ended queue, linked list
+- Maps: Hash map and tree map
+- Sets: Hash set and tree set
+- Others: binary heap
+
+Collections provide _iterators_ to access their contents:
+
+- iter
+- iter_mut
+- into_iter.
+
+Iterators have _adapter methods_ like:
+- map
+- fold
+- skip
+- take
+- rev.
+
+The map containers have an `entry` API.
