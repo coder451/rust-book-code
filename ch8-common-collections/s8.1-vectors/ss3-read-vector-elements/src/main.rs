@@ -18,4 +18,16 @@ fn main() {
         None => println!("There is no sixth element."),
     }
 
+    // This would cause a panic
+    //let _s = v[6];
+
+    // In the following code, the print statement uses an immutable
+    // reference to the first element. So the line that updates the
+    // vector would cause a compile error
+    let mut _w = vec![1, 2, 3, 4, 5];
+    let w0 = &_w[0];
+    //w.push(6);
+    println!("{w0}");
+
+
 }
