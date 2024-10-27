@@ -67,3 +67,12 @@ declarations of the sub-modules.
 
 As with `lib.rs`, additional code can be placed in the file for the 
 parent module.
+
+== Old-style modules
+
+Instead of what is described above there is an older style where each
+module is represented by a file system directory, and its code is 
+contained in a file called `mod.rs` in its directory.
+
+Having a lot of files named the same is inconvenient in large projects.
+It's not DRY - repeated things are almost always a mistake.
