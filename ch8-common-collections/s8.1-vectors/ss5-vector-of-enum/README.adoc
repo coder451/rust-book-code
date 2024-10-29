@@ -1,0 +1,41 @@
+= Using an Enum to Store Multiple Types
+
+Looking at this code:
+[source,rust]
+----
+    enum SpreadsheetCell {
+        Int(i32),
+        Float(f64),
+        Text(String),
+    }
+
+    let row = vec![
+        SpreadsheetCell::Int(3),
+        SpreadsheetCell::Text(String::from("blue")),
+        SpreadsheetCell::Float(10.12),
+    ];
+
+    println!("{:?}", &row[0]);
+    println!("{:?}", &row[1]);
+    println!("{:?}", &row[2]);
+----
+This results in warnings like
+....
+warning: field `0` is never read
+ --> src/main.rs:8:13
+  |
+8 |         Int(i32),
+  |         --- ^^^
+  |         |
+  |         field in this variant
+  |
+  = note: `SpreadsheetCell` has a derived impl for the trait `Debug`, but this is intentionally ignored during dead code analysis
+  = note: `#[warn(dead_code)]` on by default
+help: consider changing the field to be of unit type to suppress this warning while preserving the field numbering, or remove the field
+  |
+8 |         Int(()),
+  |             ~~
+....
+
+I expected the print to read the corresponding variant.
+Why is there a warning?
