@@ -38,4 +38,24 @@ help: consider changing the field to be of unit type to suppress this warning wh
 ....
 
 I expected the print to read the corresponding variant.
-Why is there a warning?
+There is no warning because the debug print is ignored in the dead code 
+analysis.
+To remove the warnings, use a match to access the details in a way that
+provides explicit typing:
+[source,rust]
+----
+    // This illustrates explicitly accessing the individual values from 
+    // the enum
+    let i = match row[0] {
+        SpreadsheetCell::Int(i) => i,
+        _ => -1
+    };
+    let f = match row[2] {
+        SpreadsheetCell::Float(f) => f,
+        _ => -1.0
+    };
+    let t = match &row[1] {
+        SpreadsheetCell::Text(t) => String::from(t),
+        _ => String::from("")
+    };
+----
