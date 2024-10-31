@@ -1,0 +1,3 @@
+= Creating a New String
+
+String creation is basically vector creation: `String::new()`.
