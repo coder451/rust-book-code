@@ -1,0 +1,6 @@
+[package]
+name = "ss3-updating-a-string"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
