@@ -1,0 +1,13 @@
+= Storing UTF-8 Encoded Text with Strings
+
+Strings are tricky:
+
+* An owned data type, so Rust reports related errors
+* Strings are a complex data type
+* UTF-8 characters have variable length
+
+Strings are collections of characters.
+
+Methods on Strings can be collection related or text related.
+
+Indexing into a string is tricky.
