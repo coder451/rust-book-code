@@ -1,0 +1,14 @@
+= What is a String?
+
+Rust core only supports _string slice_ `str` (usually borrowed `&str`),
+which is UTF-8 encoded.
+
+String literals are string slices.
+
+String is
+
+* growable
+* mutatable
+* owned
+* UTF-8 encoded
+* essentially a vector of bytes
