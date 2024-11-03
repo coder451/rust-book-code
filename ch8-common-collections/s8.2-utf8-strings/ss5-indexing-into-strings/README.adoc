@@ -1,0 +1,33 @@
+= Indexing into Strings
+
+String is a wrapper over `Vec<u8>`.
+Unicode characters can take more than one byte.
+So indexing is potentially hazardous.
+Rust does not allow vector indexing into String.
+`s[0]` is not valid code.
+
+[source,rust]
+----
+        let s1 = String::from("hello");
+        let h = s1[0];
+----
+
+....
+error[E0277]: the type `str` cannot be indexed by `{integer}`
+ --> src/main.rs:6:20
+  |
+6 |         let h = s1[0];
+  |                    ^ string indices are ranges of `usize`
+  |
+  = help: the trait `SliceIndex<str>` is not implemented for `{integer}`, which is required by `String: Index<_>`
+  = note: you can use `.chars().nth()` or `.bytes().nth()`
+          for more information, see chapter 8 in The Book: <https://doc.rust-lang.org/book/ch08-02-strings.html#indexing-into-strings>
+  = help: the trait `SliceIndex<[_]>` is implemented for `usize`
+  = help: for that trait implementation, expected `[_]`, found `str`
+  = note: required for `String` to implement `Index<{integer}>`
+....
+
+Strings can be viewed as bytes, scalars or grapheme clusters.
+
+You can use slices, but they have to respect character boundaries and
+result in valid characters.
