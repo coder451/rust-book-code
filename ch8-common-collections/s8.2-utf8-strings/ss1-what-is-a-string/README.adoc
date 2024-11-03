@@ -11,4 +11,4 @@ String is
 * mutatable
 * owned
 * UTF-8 encoded
-* essentially a vector of bytes
+* essentially a vector of bytes. String is a wrapper over `Vec<u8>`.
