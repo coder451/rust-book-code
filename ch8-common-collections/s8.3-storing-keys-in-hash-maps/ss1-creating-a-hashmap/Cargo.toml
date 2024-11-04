@@ -1,0 +1,6 @@
+[package]
+name = "ss1-creating-a-hashmap"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
