@@ -1,0 +1,17 @@
+== Storing keys in hash maps
+:hide-uri-scheme:
+
+`HashMap<K, V>` is a similar pattern to other languages.
+
+It uses 
+https://en.wikipedia.org/wiki/SipHash[SipHash] 
+as the hashing function.
+
+Whereas cryptographic hashes are designed so that it is difficult for 
+an attacker to find two messages with the same hash, SipHash is
+designed to resist _hash flooding_ DoS attacks. 
+It is an efficient _keyed hash function_.
+SipHash guarantees that, having seen message _X~j~_ and
+_SipHash(X~j~, k)_, an attacker who does not know the key _k_ cannot 
+find any information about _k_ or _SipHash(Y, k)_ for any message 
+they have not seen before. 
