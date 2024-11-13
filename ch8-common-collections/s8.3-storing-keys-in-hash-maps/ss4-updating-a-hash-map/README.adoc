@@ -1,0 +1,29 @@
+= Updating a hash map
+:source-highlighter: highlight.js
+:icons: font
+
+
+== Conditional insertion
+
+This code
+
+[source,rust]
+----
+        let mut scores = HashMap::new();
+        scores.insert(String::from("Blue"), 10);
+        let e = scores.entry(String::from("Blue"), 98);
+        println!("Blue entry: {:?}", e);
+        let e = scores.entry(String::from("Orange"));
+        println!("Nonexistent entry: {:?}", e);
+----
+
+outputs the following:
+
+[source,text]
+----
+Blue entry: Entry(OccupiedEntry { key: "Blue", value: 10, .. })
+Nonexistent entry: Entry(VacantEntry("Orange"))
+----
+
+The `Entry` is an `enum` with variants Occupied, containing an 
+`OccupiedEntry`, and `Vacant`, containing a `VacantEntry`.
