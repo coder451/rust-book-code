@@ -1,0 +1,3 @@
+= Hashing Functions
+
+Rust defaults to https://en.wikipedia.org/wiki/SipHash[SipHash].
