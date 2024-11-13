@@ -1,0 +1,76 @@
+= Maps and Ownership
+:source-highlighter: highlight.js
+:icons: font
+
+[source,rust]
+----
+fn main() {
+    println!("CH8.3-3 Hash Maps and ownership");
+    {
+        use std::collections::HashMap;
+
+        let field_name = String::from("Favorite color");
+        let field_value = String::from("Blue");
+    
+        let mut map = HashMap::new();
+        map.insert(field_name, field_value);
+        // field_name and field_value are invalid at this point, try using them and
+        // see what compiler error you get!
+        // Uncomment this:
+        println!("{}", field_name); // <1> Error here
+        // and/or this
+        //println!("{}", field_value);
+    }
+}
+----
+<1> Error here
+
+.The compiler error
+----
+Compiling ss3-hash-maps-and-ownership v0.1.0 (C:\Users\perma\dev\src\learn-rust\rust-book-code\ch8-common-collections\s8.3-storing-keys-in-hash-maps\ss3-hash-maps-and-ownership)
+error[E0382]: borrow of moved value: `field_name`
+  --> src/main.rs:14:24
+   |
+6  |         let field_name = String::from("Favorite color");
+   |             ---------- move occurs because `field_name` has type `String`, which does not implement the `Copy` trait
+...
+10 |         map.insert(field_name, field_value);
+   |                    ---------- value moved here
+...
+14 |         println!("{}", field_name);
+   |                        ^^^^^^^^^^ value borrowed here after move
+   |
+   = note: this error originates in the macro `$crate::format_args_nl` which comes from the expansion of the macro `println` (in Nightly builds, run with -Z macro-backtrace for more info)
+help: consider cloning the value if the performance cost is acceptable
+   |
+10 |         map.insert(field_name.clone(), field_value);
+   |                              ++++++++
+
+For more information about this error, try `rustc --explain E0382`.
+error: could not compile `ss3-hash-maps-and-ownership` (bin "ss3-hash-maps-and-ownership") due to 1 previous error
+----
+
+== Conditional insertion
+
+This code
+
+[source,rust]
+----
+        let mut scores = HashMap::new();
+        scores.insert(String::from("Blue"), 10);
+        let e = scores.entry(String::from("Blue"), 98);
+        println!("Blue entry: {:?}", e);
+        let e = scores.entry(String::from("Orange"));
+        println!("Nonexistent entry: {:?}", e);
+----
+
+outputs the following:
+
+[source,text]
+----
+Blue entry: Entry(OccupiedEntry { key: "Blue", value: 10, .. })
+Nonexistent entry: Entry(VacantEntry("Orange"))
+----
+
+The `Entry` is an `enum` with variants Occupied, containing an 
+`OccupiedEntry`, and `Vacant`, containing a `VacantEntry`.
