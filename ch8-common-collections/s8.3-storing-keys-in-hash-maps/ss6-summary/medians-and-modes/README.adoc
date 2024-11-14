@@ -1,0 +1,32 @@
+= Medians and Modes
+
+Given a list of integers, find the median and mode.
+
+Begin with a function that takes a vector of integers
+and computes median and mode.
+
+* median: when sorted, the value in the middle position
+* mode: the most frequent value
+
+The function will return its answers in a struct Result.
+
+Begin here:
+
+[source,rust]
+----
+fn main() {
+    println!("Medians and modes");
+    let result = compute_stats();
+    println!("{:?}", result);
+}
+
+#[derive(Debug)]
+pub struct Result {
+    median: i64,
+    mode: i64,
+}
+
+pub fn compute_stats() -> Result {
+    Result{median: 0, mode: 0,}
+}
+----
