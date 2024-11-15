@@ -178,125 +178,78 @@ fn translate(text: &str, do_debug_print: bool, debug_translate: bool) -> String 
     result
 }
 
+/// Find where the initial consonants end, then split the word
 fn translate_word(word: &str, debug_translate: bool) -> String {
     if debug_translate {
         println!("translate_word: word: {word}");
     }
     let characters = word.chars().collect::<Vec<char>>();
 
-    let mut cluster = String::new();
-    let mut rest  = String::new();
-    let mut found_cluster = false;
-    let mut uppercase_needed = false;
+    let mut head: Vec<char> = vec![];
+    let mut tail: Vec<char> = vec![];
     use std::collections::HashSet;
     let extra_vowels: HashSet<char> = "yY".chars().collect();
-    let mut  is_special = false;
+    let mut in_head = true;
     for c in characters {
         if debug_translate {
             println!("translate_word: char is {c}");
-        }
-
-        if ! found_cluster {
-            if c.is_romance_vowel_including(&extra_vowels) {
-                if debug_translate {
-                    println!("translate_word: char is a vowel");
-                }
-                // Check for any special clusters
-                let special = vec!["qu"];
-                let mut test_string = cluster.clone();
-                test_string.push(c);
-                let test_string_lc = test_string.to_ascii_lowercase();
-                for sp in special {
-                    if debug_translate {
-                        println!("translate_word: check for special consonant cluster {sp}");
-                    }
-                    if sp == test_string_lc {
-                        // treat this as a consonant cluster
-                        // is_special prevents this char from being added to the rest
-                        cluster.push(c);
-                        is_special = true;
-                        if debug_translate {
-                            println!("translate_word: found special consonant cluster; add char to it");
-                        }
-                        break;
-                    }
-                }
-                // At this point we have found the initial consonant cluster, if any
-                found_cluster = true;
-                if is_special {
-                    is_special = false;
-                    if debug_translate {
-                        println!("translate_word: finished processing this char; have cluster, need next char")
-                    }
-                    continue;
-                }
-                if debug_translate {
-                    println!("translate_word: cluster {cluster} is not a special case")
-                }
-            }
-        }
-
-        if found_cluster {
+        }        
+        if in_head && c.is_romance_vowel_including(&extra_vowels) {
             if debug_translate {
-                println!("translate_word: non-special consonant cluster complete");
+                println!("translate_word: vowel terminates head");
             }
-            if uppercase_needed {
+            in_head = false;
+            if head.len() > 0 && head[0].to_ascii_lowercase() == 'q' && c == 'u' {
                 if debug_translate {
-                    println!("translate_word: start of cluster is uppercase, add uppercased char to tail");
+                    println!("translate_word: got qu");
                 }
-                rest.push(c.to_ascii_uppercase());
-                uppercase_needed = false;
+                head.push(c);
+                continue;
             }
-            else {
-                if debug_translate {
-                    println!("translate_word: add char to tail");
-                }
-                rest.push(c);
-            }
+        }
+
+        if in_head {
+            if debug_translate {
+                println!("translate_word: add char to head");
+            }        
+            head.push(c);
         }
         else {
             if debug_translate {
-                println!("translate_word: consonant cluster not yet complete");
-            }
-            if cluster.len() == 0 && c.is_uppercase() {
-                if debug_translate {
-                    println!("translate_word: first char of consonant cluster is uppercase; add lowercase version to cluster");
-                }
-                cluster.push(c.to_ascii_lowercase());
-                uppercase_needed = true;
-            }
-            else {
-                if debug_translate {
-                    println!("translate_word: add char to cluster");
-                }
-                cluster.push(c);
-            }
+                println!("translate_word: add char to tail");
+            }        
+            tail.push(c);
         }
-    }
-    if debug_translate {
-        println!("translate_word: finished processing word characters");
     }
 
-    let mut suffix = String::new();
-    if cluster.len() == 0 {
-        if debug_translate {
-            println!("translate_word: word starts with vowel");
+    if head.len() > 0 {
+        if head[0].is_uppercase() {
+            if debug_translate {
+                println!("translate_word: leading uppercase adjustment");
+            }        
+            head[0] = head[0].to_ascii_lowercase();
+            if tail.len() > 0 {
+                tail[0] = tail[0].to_ascii_uppercase();
+            }
         }
-        suffix += "f";
+    }
+
+    let head: String = head.into_iter().collect();
+    let tail: String = tail.into_iter().collect();
+    let mut result = String::new();
+    result += &tail;
+    if head.len() > 0 {
+        result += &head;
+        result += "ay";
     }
     else {
-        if debug_translate {
-            println!("translate_word: word starts with consonant cluster {cluster}");
-        }
-        suffix += &cluster;
+        result += "fay";
     }
-    suffix += "ay";
-
-    let mut result = String::new();
-    result += &rest;
-    result += &suffix;
     if debug_translate {
-        println!("translate_word: suffix is is {suffix}, result is {result}");
-    }
+        println!("translate_word: result: {result}");
+    }        
+
     result
+
 }
+
