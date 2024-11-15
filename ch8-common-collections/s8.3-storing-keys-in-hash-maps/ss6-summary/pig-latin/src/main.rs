@@ -15,13 +15,13 @@ fn main() {
         "this; that",
         "The quick brown fox jumped over the lazy dog.",
         "I think, therefore I am.",
-        "Be a syzygy"
+        "Be a syzygy."
     ];
 
     for case in cases {
-        println!("\n\n* Case: {case}");
-        let t = translate(case);
-        println!("Result for {}: {}", case, t);
+        println!("\n\nCase: {case}");
+        let result = translate(case, false);
+        println!("Result: {}", result);
     }
 }
 
@@ -38,7 +38,7 @@ fn main() {
 // Also
 //    Preserve an initial capital
 //    Treat qu as an initial consonant cluster
-fn translate(text: &str) -> String {
+fn translate(text: &str, do_debug_print: bool) -> String {
     enum Status {
         InPassthrough,
         InAlphaWord,
@@ -54,17 +54,23 @@ fn translate(text: &str) -> String {
             match status {
                 Status::InPassthrough => {
                     if can_start_word {
-                        println!("Found: {c}, now in alpha word");
+                        if do_debug_print {
+                            println!("Found: {c}, now in alpha word");
+                        }
                         word.push(c);
                         status = Status::InAlphaWord;
                     }
                     else {
-                        println!("Pass though: {c}, cannot start word");
+                        if do_debug_print {
+                            println!("Pass though: {c}, cannot start word");
+                        }
                         result.push(c);
                     }
                 },
                 Status::InAlphaWord => {
-                    println!("Found: {c}, still in alpha word");
+                    if do_debug_print {
+                        println!("Found: {c}, still in alpha word");
+                    }
                     word.push(c);
                 },
             }
@@ -72,20 +78,26 @@ fn translate(text: &str) -> String {
         else {
             if c.is_whitespace() || [',', '.', ';', '?', ':', '!'].contains(&c) {
                 can_start_word = c.is_whitespace();
-                println!("Saw a space, can make new translateable words");
+                if do_debug_print {
+                    println!("Saw a space, can make new translateable words");
+                }
                 match status {
                     Status::InPassthrough => {
-                        println!("Pass though: {c} - space or standard punctuation");
+                        if do_debug_print {
+                            println!("Pass though: {c} - space or standard punctuation");
+                        }
                         result.push(c);
                     },
                     Status::InAlphaWord => {
                         // terminates word
                         // process the word, push c, change status
-                        result += &translate_word(&word);
+                        result += &translate_word(&word, do_debug_print);
                         word.clear();
                         result.push(c);
                         status = Status::InPassthrough;
-                        println!("Space or punct \"{c}\" terminates word {word}, result: {result}, passthrough {c}");
+                        if do_debug_print {
+                            println!("Space or punct \"{c}\" terminates word {word}, result: {result}, passthrough {c}");
+                        }
                     },
                 }
             }
@@ -93,15 +105,21 @@ fn translate(text: &str) -> String {
                 // Anything weird prevents starting a translateable word until
                 // there is a space
                 can_start_word = false;
-                println!("Saw {c}, disabling alpha words until we see a space");
+                if do_debug_print {
+                    println!("Saw {c}, disabling alpha words until we see a space");
+                }
                 match status {
                     Status::InPassthrough => {
                         result.push(c);
-                        println!("Pass though non-space, non-alpha: {c}");
+                        if do_debug_print {
+                            println!("Pass though non-space, non-alpha: {c}");
+                        }
                     },
                     Status::InAlphaWord => {
                         // terminates word without translating
-                        println!("Abandon word, pass through {word}{c}, now in passthrough");
+                        if do_debug_print {
+                            println!("Abandon word, pass through {word}{c}, now in passthrough");
+                        }
                         result += &word;
                         word.clear();
                         result.push(c);
@@ -117,8 +135,10 @@ fn translate(text: &str) -> String {
     match status {
         Status::InAlphaWord => {
             // terminates word without translating
-            println!("Word remaining: {word}");
-            result += &translate_word(&word);
+            if do_debug_print {
+                println!("Word remaining: {word}");
+            }
+            result += &translate_word(&word, do_debug_print);
         },
         _ => {},
     }
@@ -126,61 +146,94 @@ fn translate(text: &str) -> String {
     result
 }
 
-fn translate_word(word: &str) -> String {
-    println!("word: {word}");
+fn translate_word(word: &str, do_debug_print: bool) -> String {
+    if do_debug_print {
+        println!("word: {word}");
+    }
     let mut result = String::new();
     let characters = word.chars().collect::<Vec<char>>();
 
-    let mut cons = String::new();
+    let mut cluster = String::new();
     let mut rest  = String::new();
-    let mut found_vowel = false;
-    let mut case_needed = false;
+    let mut found_cluster = false;
+    let mut uppercase_needed = false;
     use std::collections::HashSet;
     let extra_vowels: HashSet<char> = "yY".chars().collect();
+    let mut  is_special = false;
     for c in characters {
+        if do_debug_print {
+            println!("c is {c}");
+        }
         if c.is_romance_vowel_including(&extra_vowels) {
+            if do_debug_print {
+                println!("{c} is a vowel");
+            }
             // Check for any special clusters
             let special = vec!["qu"];
-            let mut test_string = cons.clone();
+            let mut test_string = cluster.clone();
             test_string.push(c);
             let test_string_lc = test_string.to_ascii_lowercase();
             for sp in special {
                 if sp == test_string_lc {
                     // treat this as a consonant cluster
-                    cons.push(c);
+                    // is_special prevents this char from being added to the rest
+                    cluster.push(c);
+                    is_special = true;
+                    if do_debug_print {
+                        println!("is_special set to true for {sp}, {c} added to cluster");
+                    }
                     break;
                 }
             }
             // At this point we have found the initial consonant cluster, if any
-            found_vowel = true;
+            found_cluster = true;
+            if is_special {
+                is_special = false;
+                continue;
+            }
+            if do_debug_print {
+                println!("cluster {cluster} is not a special case")
+            }
         }
 
-        if found_vowel {
-            if case_needed {
-                rest.push(c.to_ascii_lowercase());
-                case_needed = false;
+        if found_cluster {
+            if uppercase_needed {
+                rest.push(c.to_ascii_uppercase());
+                if do_debug_print {
+                    println!("{c} uppercased, added to the tail");
+                }
+                uppercase_needed = false;
             }
             else {
                 rest.push(c);
+                if do_debug_print {
+                    println!("{c} added to the tail");
+                }
             }
         }
         else {
-            if cons.len() == 0 && c.is_uppercase() {
-                cons.push(c.to_ascii_lowercase());
-                case_needed = true;
+            if cluster.len() == 0 && c.is_uppercase() {
+                cluster.push(c.to_ascii_lowercase());
+                if do_debug_print {
+                    println!("{c} lowercased, added to the cluster, the tail needs to be uppercased");
+                }
+                uppercase_needed = true;
             }
             else {
-                cons.push(c);
+                cluster.push(c);
+                if do_debug_print {
+                    println!("{c} added to the cluster");
+                }
             }
         }
     }
 
-    if cons.len() == 0 {
-        cons += "f";
+    if cluster.len() == 0 {
+        cluster += "f";
     }
 
     result += &rest;
-    result += &cons;
+    result += &cluster;
     result += "ay";
     result
 }
