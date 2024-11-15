@@ -20,7 +20,7 @@ fn main() {
 
     for case in cases {
         println!("\n\nCase: {case}");
-        let result = translate(case, false, true);
+        let result = translate(case, false, false);
         println!("Result: {}", result);
     }
 }
